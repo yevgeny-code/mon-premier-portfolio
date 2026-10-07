@@ -196,42 +196,101 @@ header ul li a:hover {
 }
 
 
-/* ==========================================================================
-   3. SECTION PRÉSENTATION & PHOTOS
-   ========================================================================== */
 
+/* ==========================================
+   SECTION PRÉSENTATION & TITRE PRINCIPAL
+   ========================================== */
 .presentation {
     text-align: center; /* Centre le titre et le texte par défaut */
-    /* LA LIGNE MAGIQUE : Anime le fond et le texte pendant 0,4 seconde */
-    transition: background-color 0.4s ease, color 0.4s ease;
+    transition: background-color 0.4s ease, color 0.4s ease; /* Animation mode sombre */
 }
 
-/* Le conteneur Flexbox magique pour tes images */
+/* Le titre H2 "Mes Projets" */
+.presentation h2 {
+    margin: 0;             /* On supprime la marge invisible par défaut du navigateur */
+    margin-top: 15px;      /* Crée un bel espace propre avec le texte du dessus ("Qui suis-je") */
+    margin-bottom: 10px;   /* Gère l'espace parfait juste avant de commencer la liste des cartes */
+}
+
+
+/* ==========================================
+   STRUCTURE GLOBAL DES PROJETS (FLEXBOX)
+   ========================================== */
 .zone-photos {
     display: flex;
-    flex-wrap: wrap; /* Permet aux photos de passer à la ligne sur mobile */
-    justify-content: center; /* Centre les photos horizontalement */
-    gap: 15px; /* Espace régulier entre chaque image */
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 20px; 
     width: 100%;
+    margin: 0;
+    padding: 0;
+    height: auto;
+    
+    /* Supprime totalement l'étirement automatique en hauteur */
+    align-items: flex-start;    
+    align-content: flex-start;  
 }
 
+/* ==========================================
+   LES CARTES PROJETS INDIVIDUELLES
+   ========================================== */
+.projet-carte {
+    display: flex;
+    flex-direction: column;   
+    align-items: center;      
+    background-color: #edf2f7; 
+    padding: 20px;
+    border-radius: 4px;       
+    box-sizing: border-box;
+    border-left: 4px solid #319795; 
+    
+    /* 🛠️ LA CORRECTION DU RESPONSIVE : */
+    flex: 1 1 300px;           /* Base de départ à 300px pour laisser l'image respirer */
+    max-width: 380px;          /* Limite maximum sur PC */
+    width: 100%;               /* S'adapte automatiquement à l'écran sur téléphone */
+    
+    word-break: break-word;    
+    overflow-wrap: break-word;
+}
+
+/* 🛠️ SÉCURITÉ POUR VOS PHOTOS SUR MOBILE : */
+.projet-carte .img-profil {
+    width: 100%;               /* Force l'image à prendre toute la largeur de sa carte */
+    max-width: 350px;          /* Mais elle ne dépassera jamais 350px sur PC */
+    height: auto;
+    border-radius: 4px;
+}
+
+/* Titre du projet H3 (ex: "Mon Premier Site") */
+.projet-carte h3 {
+    margin: 0;             /* Supprime la marge invisible automatique du navigateur */
+    margin-bottom: 8px;    /* Colle légèrement le titre au paragraphe juste en dessous */
+}
+
+/* Description simple du projet */
+.projet-carte p {
+    font-size: 14px;
+    margin: 0;             /* Supprime la marge invisible */
+    margin-bottom: 15px;   /* Crée un petit espace avant que l'image ne commence */
+    text-align: center;
+    /* 🛠️ LA FONCTION MAGIQUE POUR LE TEXTE : */
+    overflow-wrap: break-word;  /* Sécurité universelle pour casser les mots trop longs */
+    word-break: break-word;     /* Coupe proprement le texte pour le mobile */
+}
+
+/* Captures d'écran insérées dans les cartes */
 .img-profil {
     width: 350px;
-    max-width: 100%; /* Sécurité absolue : l'image ne déborde jamais de son écran */
-    height: auto; /* Conserve les proportions d'origine de l'image */
+    max-width: 100%;       /* Sécurité : l'image s'adapte automatiquement sur téléphone */
+    height: auto;          /* Conserve les proportions d'origine de la photo */
     border-radius: 4px;
-    margin-top: 15px;
+    margin-top: 0px;
 }
-iframe.img-profil {
-    aspect-ratio: 16/9;
+/* Ajoutez display: inline-block si vous avez créé une classe à part : */
+.btn-projet {
+    display: inline-block; /* 🛠️ LA LIGNE MAGIQUE : Force le bouton à respecter la marge de l'image */
+    margin-top: 15px;      /* Crée un espace au-dessus du bouton */
 }
-.video-large {
-    width: 100%; /* Force la vidéo à prendre toute la largeur de sa boîte */
-    max-width: 350px; /* Limite la taille max pour éviter qu'elle soit géante sur un grand écran */
-    border-radius: 4px;
-}
-
-
 
 
 
@@ -386,7 +445,8 @@ iframe.img-profil {
 
 /* 6. Le gros bouton vert pour envoyer le message final */
 .contact form button, 
-#bouton-surprise {
+#bouton-surprise,
+.btn-projet {
     background-color: #319795; 
     color: white;              
     border: none;              
@@ -396,9 +456,11 @@ iframe.img-profil {
     border-radius: 6px;        
     cursor: pointer;           
     transition: background-color 0.3s ease, transform 0.2s ease; 
+    display: inline-block;
 }
 .contact form button:hover,
-#bouton-surprise:hover {
+#bouton-surprise:hover,
+.btn-projet:hover {
     background-color: #236c6b; 
     transform: scale(1.02);    
 }

@@ -1,29 +1,37 @@
+/* ==========================================================================
+   1. LES FONDATIONS & LE RESPONSIVE UNIVERSEL
+   ========================================================================= */
 html {
     scroll-behavior: smooth; /* 👈 C'EST LA LIGNE MAGIQUE POUR LA FLUIDITÉ */
 }
 
-/* ==========================================================================
-   1. LES FONDATIONS & STYLES GÉNÉRAUX (S'applique à tout le site)
-   ========================================================================== */
-
-* {
+* ,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box; /* Règle d'or : intègre le padding dans la taille des boîtes */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* ⭐ TRÈS IMPORTANT POUR VOTRE BUG : 
+   On anime uniquement la COULEUR (color) des textes, JAMAIS leur fond.
+   C'est cette règle précise qui supprime définitivement le vilain carré noir au clic ! */
+h1, h2, h3, p, strong, label, span {
+    transition: color 0.4s ease-in-out;
+}
 
-/* ==========================================
-   1. STYLE DE BASE (Mode Clair)
-   ========================================== */
 body {
     background-color: #dde5ed; /* Couleur de fond générale gris-bleu */
     padding: 0px 40px 0px 40px; /* Marges sur les côtés de l'écran */
-    /* LA LIGNE MAGIQUE : Anime le fond et le texte pendant 0,4 seconde */
-    transition: background-color 0.4s ease, color 0.4s ease;
+    /* Anime le fond et la couleur du texte de base pendant 0,4 seconde */
+    transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out;
 }
 
+
+/* ==========================================================================
+   2. LE BOUTON MODE SOMBRE (INTERRUPTEUR IPHONE)
+   ========================================================================= */
 /* Positionnement du bouton tout en haut à droite */
 .bouton-position {
     display: flex;
@@ -33,7 +41,6 @@ body {
     box-sizing: border-box;    
 }
 
-/* Le conteneur du bouton (texte + switch) positionné en haut à droite */
 /* 1. COMPORTEMENT DE BASE (PC et Tablettes) */
 .toggle-container {
     position: fixed;         
@@ -53,10 +60,6 @@ body {
     transition: opacity 0.3s ease, background-color 0.3s ease;
 }
 
-
-/* ==========================================
-   2. LE BOUTON SWITCH STYLE IPHONE (Design)
-   ========================================== */
 .switch {
     position: relative;
     display: inline-block;
@@ -75,7 +78,7 @@ body {
     cursor: pointer;
     top: 0; left: 0; right: 0; bottom: 0;
     background-color: #ccc;
-    transition: 0.4s; 
+    transition: background-color 0.4s ease, transform 0.4s ease; 
     border-radius: 34px; 
 }
 
@@ -87,7 +90,7 @@ body {
     left: 3px;
     bottom: 3px;
     background-color: white;
-    transition: 0.4s; 
+    transition: background-color 0.4s ease, transform 0.4s ease; 
     border-radius: 50px;
 }
 
@@ -101,121 +104,81 @@ body {
 }
 
 
-/* ==========================================
-   3. RÈGLES DU MODE SOMBRE (Quand activé)
-   ========================================== */
-body.sombre {
-    background-color: #222222; 
-    color: #ffffff; 
-}
-
-/* Les titres et étiquettes en mode sombre */
-body.sombre h2, body.sombre label {
-    color: #319795; 
-}
-
-/* Les fonds de toutes tes sections d'un coup */
-body.sombre .presentation, 
-body.sombre .competences,
-body.sombre .mon-atelier-flex, 
-body.sombre .contact{
-    background-color: #2d2d2d; 
-    color: #ffffff; 
-}
-body.sombre .competences li,
-body.sombre .competences li p{
-    background-color: #3c3a3a; 
-    color: #ffffff; 
-}
-body.sombre .competences li strong {
-    background-color: #3c3a3a;
-    color:#319795;
-}
-
-
-main {
-    padding: 20px; /* Donne de l'air autour de tout le contenu principal */
-}
-
-/* Règle générale pour TOUTES les sections du site */
-section {
-    background-color: white;
-    margin-bottom: 20px; /* Espace automatique sous chaque section */
-    padding: 15px;
-    border-radius: 5px;
-    border-left: 5px solid #319795; /* La jolie barre verte signature sur le côté */
-}
-
-/* Sécurité responsive : supprime la marge de la toute dernière section */
-section:last-child {
-    margin-bottom: 0;
-}
-
-
 /* ==========================================================================
-   2. EN-TÊTE (Header)
-   ========================================================================== */
-
+   3. EN-TÊTE (Header) & CONFIGURATION DES TEXTES
+   ========================================================================= */
 header {
     background-color: #3a3939;
     color: white;
     padding: 20px;
     text-align: center;
     border-radius: 0px 0px 8px 8px;
+    transition: background-color 0.4s ease-in-out;
 }
+
 header h1 {
     margin: 0;
 }
-/* On cible la liste à puces de l'en-tête */
+
 header ul {
     display: flex; /* 1. On active Flexbox pour aligner horizontalement ! */
     justify-content: space-around;
-    list-style-type: none; /* 2. On enlève les petits points noirs */
+    list-style-type: none; /* 2. On envoie les petits points noirs */
     gap: 20px; /* 3. On met 20 pixels d'espace entre chaque lien */
     padding: 0; /* 4. On nettoie les décalages par défaut */
     margin: 0;
     font-size: 20px;
     flex-wrap: wrap;
 }
-/* On cible chaque élément du menu pour leur donner la même largeur */
+
 header ul li {
     width: 130px;       /* 1. Chaque mot a désormais une boîte de 130 pixels de large */
     text-align: center; /* 2. On centre le texte PILE au milieu de ces 130 pixels */
 }
-/* On cible les liens cliquables du menu */
+
 header ul li a {
     text-decoration: none; /* 1. ENLÈVE LA LIGNE DU DESSOUS */
     color: #319795;        /* 2. CHANGE LA COULEUR (Ici le joli vert-bleu de ton site) */
     font-weight: bold;     /* Rend le texte un peu plus épais et lisible */
-    transition: color 0.3s; /* Rend le changement de couleur fluide au survol ! */
+    transition: color 0.3s ease; /* Rend le changement de couleur fluide au survol ! */
 }
 
-/* Effet magique quand la souris passe sur un lien */
 header ul li a:hover {
     color: white;          /* Le mot devient blanc quand on passe dessus ! */
 }
 
+main {
+    padding: 20px; /* Donne de l'air autour de tout le contenu principal */
+}
+
+section {
+    background-color: white;
+    margin-bottom: 20px; /* Espace automatique sous chaque section */
+    padding: 15px;
+    border-radius: 5px;
+    border-left: 5px solid #319795; /* La jolie barre verte signature sur le côté */
+    transition: background-color 0.4s ease-in-out, border-color 0.4s ease-in-out;
+}
+
+section:last-child {
+    margin-bottom: 0;
+}
 
 
-/* ==========================================
-   SECTION PRÉSENTATION & TITRE PRINCIPAL
-   ========================================== */
+/* ==========================================================================
+   4. SECTION PRÉSENTATION & LES CARTES PROJETS (FLEXBOX RESPONSIVE)
+   ========================================================================= */
 .presentation {
     text-align: center; /* Centre le titre et le texte par défaut */
-    transition: background-color 0.4s ease, color 0.4s ease; /* Animation mode sombre */
+    transition: background-color 0.4s ease-in-out; 
 }
 
-/* Le titre H2 "Mes Projets" */
 .presentation h2 {
-    margin: 0;             /* On supprime la marge invisible par défaut du navigateur */
-    margin-top: 15px;      /* Crée un bel espace propre avec le texte du dessus ("Qui suis-je") */
-    margin-bottom: 10px;   /* Gère l'espace parfait juste avant de commencer la liste des cartes */
+    margin: 0;             
+    margin-top: 15px;      
+    margin-bottom: 10px;   
 }
 
-
-/* ==========================================
-   STRUCTURE GLOBAL DES PROJETS (FLEXBOX)
-   ========================================== */
 .zone-photos {
     display: flex;
     flex-wrap: wrap; 
@@ -225,15 +188,10 @@ header ul li a:hover {
     margin: 0;
     padding: 0;
     height: auto;
-    
-    /* Supprime totalement l'étirement automatique en hauteur */
     align-items: flex-start;    
     align-content: flex-start;  
 }
 
-/* ==========================================
-   LES CARTES PROJETS INDIVIDUELLES
-   ========================================== */
 .projet-carte {
     display: flex;
     flex-direction: column;   
@@ -244,131 +202,109 @@ header ul li a:hover {
     box-sizing: border-box;
     border-left: 4px solid #319795; 
     
-    /* 🛠️ LA CORRECTION DU RESPONSIVE : */
-    flex: 1 1 300px;           /* Base de départ à 300px pour laisser l'image respirer */
-    max-width: 380px;          /* Limite maximum sur PC */
-    width: 100%;               /* S'adapte automatiquement à l'écran sur téléphone */
+    /* ⭐ REPERE RESPONSIVE : Vos cartes s'alignent côte à côte ou s'empilent tout seul sur téléphone */
+    flex: 1 1 300px;           
+    max-width: 380px;          
+    width: 100%;               
+    height: max-content;       
     
     word-break: break-word;    
     overflow-wrap: break-word;
+    transition: background-color 0.4s ease-in-out, border-color 0.4s ease-in-out;
 }
 
-/* 🛠️ SÉCURITÉ POUR VOS PHOTOS SUR MOBILE : */
-.projet-carte .img-profil {
-    width: 100%;               /* Force l'image à prendre toute la largeur de sa carte */
-    max-width: 350px;          /* Mais elle ne dépassera jamais 350px sur PC */
-    height: auto;
-    border-radius: 4px;
-}
-
-/* Titre du projet H3 (ex: "Mon Premier Site") */
 .projet-carte h3 {
-    margin: 0;             /* Supprime la marge invisible automatique du navigateur */
-    margin-bottom: 8px;    /* Colle légèrement le titre au paragraphe juste en dessous */
+    margin: 0;             
+    margin-bottom: 8px;    
 }
 
-/* Description simple du projet */
 .projet-carte p {
     font-size: 14px;
-    margin: 0;             /* Supprime la marge invisible */
-    margin-bottom: 15px;   /* Crée un petit espace avant que l'image ne commence */
+    margin: 0;             
+    margin-bottom: 15px;   
     text-align: center;
-    /* 🛠️ LA FONCTION MAGIQUE POUR LE TEXTE : */
-    overflow-wrap: break-word;  /* Sécurité universelle pour casser les mots trop longs */
-    word-break: break-word;     /* Coupe proprement le texte pour le mobile */
+    overflow-wrap: break-word;  
+    word-break: break-word;     
 }
 
-/* Captures d'écran insérées dans les cartes */
-.img-profil {
-    width: 350px;
-    max-width: 100%;       /* Sécurité : l'image s'adapte automatiquement sur téléphone */
-    height: auto;          /* Conserve les proportions d'origine de la photo */
+.projet-carte .img-profil {
+    width: 100%;               /* Force l'image à suivre la largeur de sa carte sur mobile */
+    max-width: 350px;          /* Mais elle ne dépassera jamais 350px sur PC */
+    height: auto;              
     border-radius: 4px;
     margin-top: 0px;
-}
-/* Ajoutez display: inline-block si vous avez créé une classe à part : */
-.btn-projet {
-    display: inline-block; /* 🛠️ LA LIGNE MAGIQUE : Force le bouton à respecter la marge de l'image */
-    margin-top: 15px;      /* Crée un espace au-dessus du bouton */
+    margin-bottom: 15px;       /* Crée l'espace nécessaire au-dessus du bouton vert ! */
 }
 
+.btn-projet {
+    display: inline-block;     
+    margin-top: 15px;          
+}
 
 
 /* ==========================================================================
-   4. SECTION COMPÉTENCES (Tes étiquettes / cartes)
-   ========================================================================== */
-
+   5. SECTION COMPÉTENCES & ATELIER FLEXBOX
+   ========================================================================= */
 .competences {
     background-color: white;
     padding: 20px;
     margin-top: 20px;
     border-radius: 8px;
-    width: 100%; /* Force la section à s'aligner parfaitement sur les autres */
+    width: 100%; 
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    word-break: break-word; /* Sécurité anti-débordement du texte */
+    word-break: break-word; 
     overflow-wrap: break-word;
-    /* LA LIGNE MAGIQUE : Anime le fond et le texte pendant 0,4 seconde */
-    transition: background-color 0.4s ease, color 0.4s ease;
+    transition: background-color 0.4s ease-in-out;
 }
 
-/* Le grand conteneur Flexbox de ta liste */
 .competences ul {
-    list-style-type: none; /* Enlève les puces noires par défaut */
+    list-style-type: none; 
     padding: 15px;
     display: flex;
-    justify-content: space-between; /* Aligne gauche, milieu, droite */
-    flex-wrap: wrap; /* Permet aux cartes de s'empiler sur mobile */
+    justify-content: space-between; 
+    flex-wrap: wrap; 
     gap: 10px;
 }
 
-/* Style de chaque étiquette individuelle */
 .competences li {
     background-color: #edf2f7;
     padding: 15px;
     border-radius: 4px;
-    border-left: 4px solid #319795; /* Petite barre verte sur chaque carte */
+    border-left: 4px solid #319795; 
     text-align: center;
-    
-    /* Configuration responsive idéale pour les cartes */
-    flex: 1 1 250px; /* Donne une base de 250px mais les laisse s'adapter */
-    max-width: 100%; /* Interdiction stricte de déborder de l'écran du téléphone */
-    transition: background-color 0.4s ease, color 0.4s ease;
+    flex: 1 1 250px; 
+    max-width: 100%; 
+    transition: background-color 0.4s ease-in-out;
 }
 
 .competences li strong {
-    display: block; /* Force le titre à s'isoler sur sa propre ligne */
+    display: block; 
     text-align: center;
     font-size: 18px;
-    word-break: break-word; /* Coupe les mots géants sur mobile */
+    word-break: break-word; 
     overflow-wrap: break-word;
 }
 
 .competences li p {
-    margin: 8px 0 0 0; /* Un petit espace juste au-dessus du texte */
+    margin: 8px 0 0 0; 
     font-size: 14px;
-    color: #404a5b; /* Gris anthracite professionnel pour la lecture */
-    word-break: break-word; /* Sécurité anti-débordement du texte */
+    color: #404a5b; 
+    word-break: break-word; 
     overflow-wrap: break-word;
 }
-
-
-/* ==========================================================================
-   5. COMPOSANT ATELIER FLEXBOX (Ta zone d'entraînement)
-   ========================================================================== */
 
 .mon-atelier-flex {
     display: flex;
     justify-content: space-evenly;
-    flex-wrap: wrap ;
-    background-color: #cbd5e0; /* Fond gris de test */
+    flex-wrap: wrap;
+    background-color: #cbd5e0; 
     padding: 20px;
     gap: 20px;
     border-radius: 8px;
     margin-top: 20px;
-    /* LA LIGNE MAGIQUE : Anime le fond et le texte pendant 0,4 seconde */
-    transition: background-color 0.4s ease, color 0.4s ease;
+    transition: background-color 0.4s ease-in-out;
 }
 
 .petite-boite {
@@ -377,32 +313,28 @@ header ul li a:hover {
     color: white;
     font-weight: bold;
     display: flex;
-    justify-content: center; /* Centre la lettre horizontalement dans le carré */
-    align-items: center; /* Centre la lettre verticalement dans le carré */
+    justify-content: center; 
+    align-items: center; 
     border-radius: 4px;
 }
 
-/* Les couleurs de tes boîtes de test */
-.une { background-color: #e53e3e; }   /* Rouge */
-.deux { background-color: #3182ce; }   /* Bleu */
-.trois { background-color: #38a169; }  /* Vert */
+.une { background-color: #e53e3e; }   
+.deux { background-color: #3182ce; }   
+.trois { background-color: #38a169; }  
 
 
 /* ==========================================================================
-   6. SECTION CONTACT & FORMULAIRE
-   ========================================================================== */
-
-/* 1. Le fond blanc de la section complète */
+   6. SECTION CONTACT & STRUCTURES DES BOUTONS VERTS
+   ========================================================================= */
 .contact {
     background-color: white;
     padding: 20px;
     margin-top: 5px; 
     border-radius: 8px 8px 0px 0px; 
     text-align: center;
-    transition: background-color 0.4s ease, color 0.4s ease;
+    transition: background-color 0.4s ease-in-out;
 }
 
-/* 2. La boîte du formulaire qui aligne tout en colonne */
 .contact form {
     display: flex;
     flex-direction: column; 
@@ -413,13 +345,11 @@ header ul li a:hover {
     gap: 15px;              
 }
 
-/* 3. Ton bouton surprise (qui apparaît en premier dans ton formulaire actuel) */
 #bouton-surprise {
     display: block;      
     margin: 20px auto;   
 }
 
-/* 4. Les cases pour écrire (nom et email) */
 .contact form input {
     width: 100%;          
     padding: 10px 12px;   
@@ -429,13 +359,13 @@ header ul li a:hover {
     background-color: #f7fafc; 
     transition: border-color 0.2s; 
 }
+
 .contact form input:focus {
     outline: none;        
     border-color: #319795; 
     background-color: white; 
 }
 
-/* 5. Le message d'erreur rouge (qui apparaît juste au-dessus du bouton envoyer) */
 #erreur-message {
     color: #319795;         
     font-weight: bold;      
@@ -443,46 +373,85 @@ header ul li a:hover {
     font-family: sans-serif;
 }
 
-/* 6. Le gros bouton vert pour envoyer le message final */
+/* ⭐ MUTUALISATION DES BOUTONS VERTS : 
+   On applique le style parfait à vos boutons et vos liens projets */
 .contact form button, 
 #bouton-surprise,
 .btn-projet {
-    background-color: #319795; 
-    color: white;              
-    border: none;              
-    padding: 12px 20px;        
-    font-size: 16px;           
-    font-weight: bold;         
-    border-radius: 6px;        
-    cursor: pointer;           
-    transition: background-color 0.3s ease, transform 0.2s ease; 
-    display: inline-block;
+    background-color: #319795;
+color: white !important;
+border: none;
+padding: 12px 20px;
+font-size: 16px;
+font-weight: bold;
+border-radius: 6px;
+cursor: pointer;
+text-decoration: none;     /* Enlève la ligne sous le texte du lien /
+display: inline-block;     / Permet de former un vrai bloc bouton cliquable */
+transition: background-color 0.3s ease, transform 0.2s ease;
 }
 .contact form button:hover,
 #bouton-surprise:hover,
 .btn-projet:hover {
-    background-color: #236c6b; 
-    transform: scale(1.02);    
+background-color: #236c6b;
+transform: scale(1.02);
 }
-
-/* ==========================================================================
-   7. PIED DE PAGE (Footer - Tout en bas)
-   ========================================================================== */
-
 footer {
-    color: black;
-    text-align: center;
-    padding: 0px;
+color: black;
+text-align: center;
+padding: 0px;
 }
-/* 2. ADAPTATION UNIQUEMENT POUR LE TÉLÉPHONE (Écrans de moins de 768px) */
-@media (max-width: /*767px*/ 850px) {
-    .toggle-container {
-        top: auto;           /* On annule la position du haut */
-        bottom: 20px;        /* On le place en bas ! */
-        right: 20px;         /* Légèrement plus près du bord sur téléphone */
-        
-        /* ASTUCE MAGIQUE : Diminue la taille globale de tout le bloc de 20% */
-        transform: scale(0.8); 
-        transform-origin: bottom right; /* Aligne la réduction vers le coin bas-droite */
-    }
+/* ==========================================================================
+   7. LE MODE SOMBRE REGROUPÉ (TOUT EN BAS - PRIORITAIRE)
+   ========================================================================= */
+body.sombre {
+    background-color: #222222; 
+    color: #ffffff; 
 }
+
+body.sombre h2, 
+body.sombre label {
+    color: #319795; 
+}
+
+body.sombre .presentation, 
+body.sombre .competences,
+body.sombre .mon-atelier-flex, 
+body.sombre .contact {
+    background-color: #2d2d2d; 
+    color: #ffffff; 
+}
+
+/* 🛠️ CORRECTION : On applique le fond uniquement sur les BLOCS (li et .projet-carte) */
+/* On retire les paragraphes (p) de cette ligne pour supprimer le carré noir ! */
+body.sombre .competences li,
+body.sombre .projet-carte {       
+    background-color: #3c3a3a; 
+}
+
+/* 🛠️ AJOUTÉ : On gère la couleur du texte des paragraphes à part, sans toucher à leur fond */
+body.sombre .competences li p,
+body.sombre .projet-carte p,
+body.sombre .projet-carte h3 {    
+    color: #ffffff; 
+}
+
+body.sombre .competences li strong {
+    
+    color: #319795;
+}
+
+body.sombre footer {
+    color: #ffffff;
+}
+/* ==========================================================================
+8. ADAPTATION LE BOUTON SWITCH UNIQUEMENT SUR MOBILE (850PX)
+========================================================================= /
+@media (max-width: 850px) {
+.toggle-container {
+top: auto;           / On annule la position du haut /
+bottom: 20px;        / On le place en bas ! /
+right: 20px;         / Légèrement plus près du bord sur téléphone /
+transform: scale(0.8);
+transform-origin: bottom right; / Aligne la réduction vers le coin bas-droite */
+

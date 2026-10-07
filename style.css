@@ -35,17 +35,16 @@ body {
 
 /* Le conteneur du bouton (texte + switch) positionné en haut à droite */
 .toggle-container {
-    position: fixed;  /* 📌 Rend le bouton indépendant du reste du site */
-    top: 20px;          /* 📌 20px d'espace par rapport au haut de l'écran */
-    right: 40px;        /* 📌 40px d'espace par rapport à la droite de l'écran */
-    
     display: flex;
-    align-items: center; /* Aligne le texte "Mode Sombre" et le switch sur la même ligne */
-    gap: 10px;           /* Espace de 10px entre le texte et le bouton */
-    
+    justify-content: flex-end; /* Aligne le bouton à droite */
+    align-items: center;       /* Centre le texte et le bouton sur la même ligne */
+    gap: 10px;                 /* Espace entre le texte et l'interrupteur */
+    padding: 15px 20px;        /* Marges propres en haut et sur les côtés */
+    width: 100%;               
+    box-sizing: border-box;    
     font-family: sans-serif;
     font-weight: bold;
-    z-index: 1000;       /* Securité : passe toujours au-dessus des images ou textes */
+    background-color: transparent; /* Fond transparent pour se fondre dans le site */
 }
 
 
@@ -406,4 +405,15 @@ footer {
     color: black;
     text-align: center;
     padding: 0px;
+}
+/* 💻 DESIGN DU BOUTON POUR LES GRANDS ÉCRANS (Ordinateurs) */
+@media (min-width: 768px) {
+    .toggle-container {
+        position: fixed;       /* Reste scotché à l'écran UNIQUEMENT sur PC */
+        top: 20px;          
+        right: 40px;        
+        width: auto;           /* Reprend sa taille normale */
+        padding: 0;            /* Enlève les marges du mode mobile */
+        z-index: 1000;         /* Reste au-dessus de tout sur PC */
+    }
 }

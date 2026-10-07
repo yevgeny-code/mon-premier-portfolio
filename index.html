@@ -97,6 +97,14 @@
             
             <!-- 1. On donne l'id "mon-formulaire" à la boîte complète et action = pouvoir faire des email-->
             <form id="monFormulaire" action="https://formsubmit.co/yevgeny.code@gmail.com" method="POST">
+                <!-- 🛠️ OPTION 1 : Redirige l'utilisateur sur votre portfolio après l'envoi -->
+                <input type="hidden" name="_next" value="https://github.io">
+
+                <!-- 🛠️ OPTION 2 : Donne un titre propre au mail que vous recevrez dans votre boîte -->
+                <input type="hidden" name="_subject" value="Nouveau message depuis mon Portfolio !">
+
+                <!-- 🛠️ OPTION 3 : Supprime la case "Je ne suis pas un robot" (Envoi 100% direct) -->
+                <input type="hidden" name="_captcha" value="false">
                 <label>Votre nom :</label>
                 <!-- 2. On donne l'id "champ-nom" à la case où on écrit le nom -->
                 <input type="text" id="champ-nom" name="name" placeholder="Ex: Dupont" required>

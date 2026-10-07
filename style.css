@@ -34,17 +34,23 @@ body {
 }
 
 /* Le conteneur du bouton (texte + switch) positionné en haut à droite */
+/* 1. COMPORTEMENT DE BASE (PC et Tablettes) */
 .toggle-container {
+    position: fixed;         
+    top: 20px;               /* En haut sur PC */
+    right: 40px;             /* À droite sur PC */
+    z-index: 9999;           
+    
     display: flex;
-    justify-content: flex-end; /* Aligne le bouton à droite */
-    align-items: center;       /* Centre le texte et le bouton sur la même ligne */
-    gap: 10px;                 /* Espace entre le texte et l'interrupteur */
-    padding: 15px 20px;        /* Marges propres en haut et sur les côtés */
-    width: 100%;               
-    box-sizing: border-box;    
+    align-items: center;     
+    gap: 10px;               
+    
     font-family: sans-serif;
     font-weight: bold;
-    background-color: transparent; /* Fond transparent pour se fondre dans le site */
+    background-color: transparent;
+    border: none;
+    outline: none;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
 }
 
 
@@ -406,14 +412,15 @@ footer {
     text-align: center;
     padding: 0px;
 }
-/* 💻 DESIGN DU BOUTON POUR LES GRANDS ÉCRANS (Ordinateurs) */
-@media (min-width: 768px) {
+/* 2. ADAPTATION UNIQUEMENT POUR LE TÉLÉPHONE (Écrans de moins de 768px) */
+@media (max-width: /*767px*/ 850px) {
     .toggle-container {
-        position: fixed;       /* Reste scotché à l'écran UNIQUEMENT sur PC */
-        top: 20px;          
-        right: 40px;        
-        width: auto;           /* Reprend sa taille normale */
-        padding: 0;            /* Enlève les marges du mode mobile */
-        z-index: 1000;         /* Reste au-dessus de tout sur PC */
+        top: auto;           /* On annule la position du haut */
+        bottom: 20px;        /* On le place en bas ! */
+        right: 20px;         /* Légèrement plus près du bord sur téléphone */
+        
+        /* ASTUCE MAGIQUE : Diminue la taille globale de tout le bloc de 20% */
+        transform: scale(0.8); 
+        transform-origin: bottom right; /* Aligne la réduction vers le coin bas-droite */
     }
 }

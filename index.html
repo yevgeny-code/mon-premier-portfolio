@@ -95,15 +95,17 @@
             <h2>Me contacter</h2>
             <!--<button id="bouton-surprise">Clique ici</button>-->
             
-            <!-- 1. On donne l'id "mon-formulaire" à la boîte complète -->
-            <form id="mon-formulaire">
+            <!-- 1. On donne l'id "mon-formulaire" à la boîte complète et action = pouvoir faire des email-->
+            <form id="monFormulaire" action="https://formsubmit.co" method="POST">
                 <label>Votre nom :</label>
-                
                 <!-- 2. On donne l'id "champ-nom" à la case où on écrit le nom -->
-                <input type="text" id="champ-nom" placeholder="Ex: Dupont">
+                <input type="text" id="champ-nom" name="name" placeholder="Ex: Dupont" required>
                 
                 <label>Votre email :</label>
-                <input type="email" id="champ-email" placeholder="Ex: yevgeny@email.com">
+                <input type="email" id="champ-email" name="email" placeholder="Ex: yevgeny@email.com" required>
+
+                <label>Votre message :</label>
+                <textarea id="champ-message" name="message" placeholder="Écrivez votre message ici..." required></textarea>
                 <!-- C'est cette boîte (p) qui va accueillir nos messages d'erreur. Elle est cachée au départ (display: none) -->
                 <p id="erreur-message" ></p>
 

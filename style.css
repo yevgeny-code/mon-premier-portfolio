@@ -238,7 +238,7 @@ section:last-child {
 
 .btn-projet {
     display: inline-block;     
-    margin-top: 15px;          
+    margin-top: 5px;          
 }
 
 
@@ -350,17 +350,27 @@ section:last-child {
     margin: 20px auto;   
 }
 
-.contact form input {
+/* 4. Les cases pour écrire (nom, email ET le grand message) */
+.contact form input,
+.contact form textarea { /* 👈 On l'ajoute ici avec une virgule */
     width: 100%;          
     padding: 10px 12px;   
     border: 1px solid #cbd5e0; 
     border-radius: 6px;   
     font-size: 15px;      
     background-color: #f7fafc; 
-    transition: border-color 0.2s; 
+    font-family: inherit; /* Pour garder la même police d'écriture */
 }
 
-.contact form input:focus {
+/* On donne une hauteur par défaut au grand rectangle de message pour qu'il soit plus grand */
+.contact form textarea {
+    height: 120px;
+    resize: vertical; /* Permet à l'utilisateur d'agrandir la case en hauteur s'il veut */
+}
+
+/* L'effet au clic fonctionne aussi pour le message */
+.contact form input:focus,
+.contact form textarea:focus {
     outline: none;        
     border-color: #319795; 
     background-color: white; 

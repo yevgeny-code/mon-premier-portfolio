@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>premier site</title>
+  <link rel="stylesheet" href="style.css">
+  
+</head>
+<body>
+    <div class="toggle-container bouton-position">
+        <span>Mode Sombre</span>
+        <label class="switch">
+             <!-- C'est cette case qui va détecter le clic -->
+             <input type="checkbox" id="bouton-theme">
+             <!-- C'llle-ci sert à dessiner le bouton style iPhone -->
+             <span class="slider"></span>
+        </label>
+    </div>
+
+    <header>
+        <h1>Mon Super Site de Dev</h1>
+        <ul>
+          <li><a href="#presentation">presentation</a></li>
+          <li><a href="#competences">competences</a></li>
+          <li><a href="#contact">contact</a></li>
+          
+        </ul>
+    </header>
+
+    <main>
+        <section class="presentation" id="presentation">
+          
+            <h2>Qui suis-je ?</h2>
+            <p>Moi c'est <strong>Yevgeny</strong>, j'ai <strong>28 ans</strong> et j'ai décidé de troquer mes outils de <strong>jardinier</strong> pour un clavier !</p>
+
+            <p>Passionné par le monde du digital, je suis futur étudiant à <strong>Technocité (Mons)</strong> avec un objectif clair : devenir <strong>Développeur Web Fullstack</strong>.</p>
+
+            <p>Curieux, rigoureux et habitué au travail de précision, j’apprends aujourd'hui à concevoir des applications et des sites web de A à Z. Ce premier projet en HTML et CSS n'est que le début d'une grande aventure numérique !</p>
+            <!-- 👇 ON AJOUTE L'IMAGE ICI 👇 -->
+            <div class="zone-photos">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6qrRfC5T1EeMfo2zNVtKVAMG8f2AXzbrOZA0RWJSSqQ&s=10" alt="Un ordinateur portable ouvert sur une table" class="img-profil">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6qrRfC5T1EeMfo2zNVtKVAMG8f2AXzbrOZA0RWJSSqQ&s=10" alt="Un ordinateur portable ouvert sur une table" class="img-profil">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6qrRfC5T1EeMfo2zNVtKVAMG8f2AXzbrOZA0RWJSSqQ&s=10" alt="Un ordinateur portable ouvert sur une table" class="img-profil">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6qrRfC5T1EeMfo2zNVtKVAMG8f2AXzbrOZA0RWJSSqQ&s=10" alt="Un ordinateur portable ouvert sur une table" class="img-profil">
+                <iframe src="https://www.youtube.com/embed/H_tyusq5NqI" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen 
+                        class="img-profil video-large">
+                </iframe>
+            </div>
+            
+          
+            
+        </section>
+
+        <section class="competences" id="competences">
+            <h2>Mes compétences</h2>
+            <ul>
+              <li>
+                  <strong>HTML5</strong>
+                  <p>Je sais structurer une page web proprement en utilisant les bonnes balises comme header, main, section et footer.</p>
+              </li>
+              <li>
+                  <strong>CSS3</strong>
+                  <p>Je sais donner du style, changer les couleurs, arrondir les bords et gérer l'ordre de lecture avec la cascade.</p>
+              </li>
+              <li>
+                  <strong>Flexbox</strong>
+                  <p>Je sais aligner des éléments horizontalement ou verticalement, gérer les espaces et rendre le design responsive.</p>
+              </li>
+              <li>
+                  <strong>Javascript</strong>
+                  <p>J'ai fait mes toutes première ligne de code</p>
+              </li>
+            </ul>
+        </section>
+        <section class="mon-atelier-flex">
+            <!-- Les 3 boîtes enfants -->
+            <div class="petite-boite une">Boîte A</div>
+            <div class="petite-boite deux">Boîte B</div>
+            <div class="petite-boite trois">Boîte C</div>
+            
+        </section>
+        
+    </main>
+
+    <footer>
+        <section class="contact" id="contact">
+            <h2>Me contacter</h2>
+            <button id="bouton-surprise">Clique ici</button>
+            
+            <!-- 1. On donne l'id "mon-formulaire" à la boîte complète -->
+            <form id="mon-formulaire">
+                <label>Votre nom :</label>
+                
+                <!-- 2. On donne l'id "champ-nom" à la case où on écrit le nom -->
+                <input type="text" id="champ-nom" placeholder="Ex: Dupont">
+                
+                <label>Votre email :</label>
+                <input type="email" id="champ-email" placeholder="Ex: yevgeny@email.com">
+                <!-- C'est cette boîte (p) qui va accueillir nos messages d'erreur. Elle est cachée au départ (display: none) -->
+                <p id="erreur-message" ></p>
+
+                <button type="submit">Envoyer le message</button>
+                
+            </form>
+        </section>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+
+  
+</body>
+</html>

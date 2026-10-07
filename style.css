@@ -1,0 +1,409 @@
+html {
+    scroll-behavior: smooth; /* 👈 C'EST LA LIGNE MAGIQUE POUR LA FLUIDITÉ */
+}
+
+/* ==========================================================================
+   1. LES FONDATIONS & STYLES GÉNÉRAUX (S'applique à tout le site)
+   ========================================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Règle d'or : intègre le padding dans la taille des boîtes */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+/* ==========================================
+   1. STYLE DE BASE (Mode Clair)
+   ========================================== */
+body {
+    background-color: #dde5ed; /* Couleur de fond générale gris-bleu */
+    padding: 0px 40px 0px 40px; /* Marges sur les côtés de l'écran */
+    /* LA LIGNE MAGIQUE : Anime le fond et le texte pendant 0,4 seconde */
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Positionnement du bouton tout en haut à droite */
+.bouton-position {
+    display: flex;
+    justify-content: flex-end; 
+    padding: 20px 40px 0 0;   
+    width: 100%;              
+    box-sizing: border-box;    
+}
+
+/* Le conteneur du bouton (texte + switch) positionné en haut à droite */
+.toggle-container {
+    position: fixed;  /* 📌 Rend le bouton indépendant du reste du site */
+    top: 20px;          /* 📌 20px d'espace par rapport au haut de l'écran */
+    right: 40px;        /* 📌 40px d'espace par rapport à la droite de l'écran */
+    
+    display: flex;
+    align-items: center; /* Aligne le texte "Mode Sombre" et le switch sur la même ligne */
+    gap: 10px;           /* Espace de 10px entre le texte et le bouton */
+    
+    font-family: sans-serif;
+    font-weight: bold;
+    z-index: 1000;       /* Securité : passe toujours au-dessus des images ou textes */
+}
+
+
+/* ==========================================
+   2. LE BOUTON SWITCH STYLE IPHONE (Design)
+   ========================================== */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s; 
+    border-radius: 34px; 
+}
+
+.slider::before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s; 
+    border-radius: 50px;
+}
+
+/* Quand le switch est activé (Vert/Turquoise) */
+.switch input:checked + .slider {
+    background-color: #319795;
+}
+
+.switch input:checked + .slider::before {
+    transform: translateX(24px);
+}
+
+
+/* ==========================================
+   3. RÈGLES DU MODE SOMBRE (Quand activé)
+   ========================================== */
+body.sombre {
+    background-color: #222222; 
+    color: #ffffff; 
+}
+
+/* Les titres et étiquettes en mode sombre */
+body.sombre h2, body.sombre label {
+    color: #319795; 
+}
+
+/* Les fonds de toutes tes sections d'un coup */
+body.sombre .presentation, 
+body.sombre .competences,
+body.sombre .mon-atelier-flex, 
+body.sombre .contact{
+    background-color: #2d2d2d; 
+    color: #ffffff; 
+}
+body.sombre .competences li,
+body.sombre .competences li p{
+    background-color: #3c3a3a; 
+    color: #ffffff; 
+}
+body.sombre .competences li strong {
+    background-color: #3c3a3a;
+    color:#319795;
+}
+
+
+main {
+    padding: 20px; /* Donne de l'air autour de tout le contenu principal */
+}
+
+/* Règle générale pour TOUTES les sections du site */
+section {
+    background-color: white;
+    margin-bottom: 20px; /* Espace automatique sous chaque section */
+    padding: 15px;
+    border-radius: 5px;
+    border-left: 5px solid #319795; /* La jolie barre verte signature sur le côté */
+}
+
+/* Sécurité responsive : supprime la marge de la toute dernière section */
+section:last-child {
+    margin-bottom: 0;
+}
+
+
+/* ==========================================================================
+   2. EN-TÊTE (Header)
+   ========================================================================== */
+
+header {
+    background-color: #3a3939;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 0px 0px 8px 8px;
+}
+header h1 {
+    margin: 0;
+}
+/* On cible la liste à puces de l'en-tête */
+header ul {
+    display: flex; /* 1. On active Flexbox pour aligner horizontalement ! */
+    justify-content: space-around;
+    list-style-type: none; /* 2. On enlève les petits points noirs */
+    gap: 20px; /* 3. On met 20 pixels d'espace entre chaque lien */
+    padding: 0; /* 4. On nettoie les décalages par défaut */
+    margin: 0;
+    font-size: 20px;
+    flex-wrap: wrap;
+}
+/* On cible chaque élément du menu pour leur donner la même largeur */
+header ul li {
+    width: 130px;       /* 1. Chaque mot a désormais une boîte de 130 pixels de large */
+    text-align: center; /* 2. On centre le texte PILE au milieu de ces 130 pixels */
+}
+/* On cible les liens cliquables du menu */
+header ul li a {
+    text-decoration: none; /* 1. ENLÈVE LA LIGNE DU DESSOUS */
+    color: #319795;        /* 2. CHANGE LA COULEUR (Ici le joli vert-bleu de ton site) */
+    font-weight: bold;     /* Rend le texte un peu plus épais et lisible */
+    transition: color 0.3s; /* Rend le changement de couleur fluide au survol ! */
+}
+
+/* Effet magique quand la souris passe sur un lien */
+header ul li a:hover {
+    color: white;          /* Le mot devient blanc quand on passe dessus ! */
+}
+
+
+/* ==========================================================================
+   3. SECTION PRÉSENTATION & PHOTOS
+   ========================================================================== */
+
+.presentation {
+    text-align: center; /* Centre le titre et le texte par défaut */
+    /* LA LIGNE MAGIQUE : Anime le fond et le texte pendant 0,4 seconde */
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Le conteneur Flexbox magique pour tes images */
+.zone-photos {
+    display: flex;
+    flex-wrap: wrap; /* Permet aux photos de passer à la ligne sur mobile */
+    justify-content: center; /* Centre les photos horizontalement */
+    gap: 15px; /* Espace régulier entre chaque image */
+    width: 100%;
+}
+
+.img-profil {
+    width: 350px;
+    max-width: 100%; /* Sécurité absolue : l'image ne déborde jamais de son écran */
+    height: auto; /* Conserve les proportions d'origine de l'image */
+    border-radius: 4px;
+    margin-top: 15px;
+}
+iframe.img-profil {
+    aspect-ratio: 16/9;
+}
+.video-large {
+    width: 100%; /* Force la vidéo à prendre toute la largeur de sa boîte */
+    max-width: 350px; /* Limite la taille max pour éviter qu'elle soit géante sur un grand écran */
+    border-radius: 4px;
+}
+
+
+
+
+
+/* ==========================================================================
+   4. SECTION COMPÉTENCES (Tes étiquettes / cartes)
+   ========================================================================== */
+
+.competences {
+    background-color: white;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+    width: 100%; /* Force la section à s'aligner parfaitement sur les autres */
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    word-break: break-word; /* Sécurité anti-débordement du texte */
+    overflow-wrap: break-word;
+    /* LA LIGNE MAGIQUE : Anime le fond et le texte pendant 0,4 seconde */
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Le grand conteneur Flexbox de ta liste */
+.competences ul {
+    list-style-type: none; /* Enlève les puces noires par défaut */
+    padding: 15px;
+    display: flex;
+    justify-content: space-between; /* Aligne gauche, milieu, droite */
+    flex-wrap: wrap; /* Permet aux cartes de s'empiler sur mobile */
+    gap: 10px;
+}
+
+/* Style de chaque étiquette individuelle */
+.competences li {
+    background-color: #edf2f7;
+    padding: 15px;
+    border-radius: 4px;
+    border-left: 4px solid #319795; /* Petite barre verte sur chaque carte */
+    text-align: center;
+    
+    /* Configuration responsive idéale pour les cartes */
+    flex: 1 1 250px; /* Donne une base de 250px mais les laisse s'adapter */
+    max-width: 100%; /* Interdiction stricte de déborder de l'écran du téléphone */
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.competences li strong {
+    display: block; /* Force le titre à s'isoler sur sa propre ligne */
+    text-align: center;
+    font-size: 18px;
+    word-break: break-word; /* Coupe les mots géants sur mobile */
+    overflow-wrap: break-word;
+}
+
+.competences li p {
+    margin: 8px 0 0 0; /* Un petit espace juste au-dessus du texte */
+    font-size: 14px;
+    color: #404a5b; /* Gris anthracite professionnel pour la lecture */
+    word-break: break-word; /* Sécurité anti-débordement du texte */
+    overflow-wrap: break-word;
+}
+
+
+/* ==========================================================================
+   5. COMPOSANT ATELIER FLEXBOX (Ta zone d'entraînement)
+   ========================================================================== */
+
+.mon-atelier-flex {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap ;
+    background-color: #cbd5e0; /* Fond gris de test */
+    padding: 20px;
+    gap: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    /* LA LIGNE MAGIQUE : Anime le fond et le texte pendant 0,4 seconde */
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.petite-boite {
+    width: 200px;
+    height: 250px;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    justify-content: center; /* Centre la lettre horizontalement dans le carré */
+    align-items: center; /* Centre la lettre verticalement dans le carré */
+    border-radius: 4px;
+}
+
+/* Les couleurs de tes boîtes de test */
+.une { background-color: #e53e3e; }   /* Rouge */
+.deux { background-color: #3182ce; }   /* Bleu */
+.trois { background-color: #38a169; }  /* Vert */
+
+
+/* ==========================================================================
+   6. SECTION CONTACT & FORMULAIRE
+   ========================================================================== */
+
+/* 1. Le fond blanc de la section complète */
+.contact {
+    background-color: white;
+    padding: 20px;
+    margin-top: 5px; 
+    border-radius: 8px 8px 0px 0px; 
+    text-align: center;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* 2. La boîte du formulaire qui aligne tout en colonne */
+.contact form {
+    display: flex;
+    flex-direction: column; 
+    max-width: 400px;       
+    margin: 0 auto;         
+    text-align: left;       
+    flex-wrap: wrap; 
+    gap: 15px;              
+}
+
+/* 3. Ton bouton surprise (qui apparaît en premier dans ton formulaire actuel) */
+#bouton-surprise {
+    display: block;      
+    margin: 20px auto;   
+}
+
+/* 4. Les cases pour écrire (nom et email) */
+.contact form input {
+    width: 100%;          
+    padding: 10px 12px;   
+    border: 1px solid #cbd5e0; 
+    border-radius: 6px;   
+    font-size: 15px;      
+    background-color: #f7fafc; 
+    transition: border-color 0.2s; 
+}
+.contact form input:focus {
+    outline: none;        
+    border-color: #319795; 
+    background-color: white; 
+}
+
+/* 5. Le message d'erreur rouge (qui apparaît juste au-dessus du bouton envoyer) */
+#erreur-message {
+    color: #319795;         
+    font-weight: bold;      
+    margin: 10px 0;         
+    font-family: sans-serif;
+}
+
+/* 6. Le gros bouton vert pour envoyer le message final */
+.contact form button, 
+#bouton-surprise {
+    background-color: #319795; 
+    color: white;              
+    border: none;              
+    padding: 12px 20px;        
+    font-size: 16px;           
+    font-weight: bold;         
+    border-radius: 6px;        
+    cursor: pointer;           
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+}
+.contact form button:hover,
+#bouton-surprise:hover {
+    background-color: #236c6b; 
+    transform: scale(1.02);    
+}
+
+/* ==========================================================================
+   7. PIED DE PAGE (Footer - Tout en bas)
+   ========================================================================== */
+
+footer {
+    color: black;
+    text-align: center;
+    padding: 0px;
+}
